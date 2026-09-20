@@ -4,37 +4,38 @@ export const Gameboard = () => {
 	let shipArrays = [];
 
 	const placeShip = (length, coordinate, direction) => {
-		const shipInstance = createShip(length);
+		let shipCoordinate;
 
 		if (direction === 'horizontal') {
-			const shipCoordinate = Array.from({ length: length }, (_, i) => [
+			shipCoordinate = Array.from({ length: length }, (_, i) => [
 				coordinate[0] + i,
 				coordinate[1],
 			]);
-			const isValidCoordinate = shipCoordinate.every(
-				([x, y]) => x >= 0 && x <= 9 && y >= 0 && y <= 9
-			);
-			if (!isValidCoordinate) return false;
-			shipArrays.push({
-				instance: shipInstance,
-				coordinate: shipCoordinate,
-				direction: 'horizontal',
-			});
 		} else if (direction === 'vertical') {
-			const shipCoordinate = Array.from({ length: length }, (_, i) => [
+			shipCoordinate = Array.from({ length: length }, (_, i) => [
 				coordinate[0],
 				coordinate[1] + i,
 			]);
-			const isValidCoordinate = shipCoordinate.every(
-				([x, y]) => x >= 0 && x <= 9 && y >= 0 && y <= 9
-			);
-			if (!isValidCoordinate) return false;
-			shipArrays.push({
-				instance: shipInstance,
-				coordinate: shipCoordinate,
-				direction: 'vertical',
-			});
+		} else {
+			return false;
 		}
+		const isValidCoordinate = shipCoordinate.every(
+			([x, y]) => x >= 0 && x <= 9 && y >= 0 && y <= 9
+		);
+		if (!isValidCoordinate) return false;
+		const isExist = shipArrays.some((obj) => {
+			return shipCoordinate.some((item) => {
+				return obj.coordinate.some(
+					(pair) => pair[0] === item[0] && pair[1] === item[1]
+				);
+			});
+		});
+		if (isExist) return false;
+		const shipInstance = createShip(length);
+		shipArrays.push({
+			instance: shipInstance,
+			coordinate: shipCoordinate,
+		});
 		return shipInstance;
 	};
 

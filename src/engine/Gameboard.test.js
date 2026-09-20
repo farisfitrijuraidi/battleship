@@ -49,4 +49,11 @@ describe('Gameboard object', () => {
 
 		expect(boardOne.placeShip(5, [9, 9], 'vertical')).toBe(false);
 	});
+
+	it('blocks a ship from being placed on top of coordinates already taken by another ship', () => {
+		const boardOne = Gameboard();
+		const shipOne = boardOne.placeShip(3, [0, 2], 'horizontal');
+
+		expect(boardOne.placeShip(5, [0, 2], 'horizontal')).toBe(false);
+	});
 });
