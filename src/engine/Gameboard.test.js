@@ -105,4 +105,37 @@ describe('Gameboard object', () => {
 			expect(boardOne.receiveAttack([-1, -2])).toBe(null);
 		});
 	});
+
+	describe('fleet status and game over', () => {
+		it('reports false when no ships have taken damage yet', () => {
+			const boardOne = Gameboard();
+			const shipOne = boardOne.placeShip(3, [0, 2], 'horizontal');
+
+			expect(boardOne.allSunk()).toBe(false);
+		});
+
+		it('reports false when some ships are sunk but at least one ship is still floating', () => {
+			const boardOne = Gameboard();
+			const shipOne = boardOne.placeShip(3, [0, 2], 'horizontal');
+			const shipTwo = boardOne.placeShip(5, [3, 3], 'horizontal');
+			boardOne.receiveAttack([0, 2]);
+			boardOne.receiveAttack([1, 2]);
+			boardOne.receiveAttack([2, 2]);
+
+			expect(boardOne.allSunk()).toBe(false);
+		});
+
+		it('reports true only after every placed ship on the board is completely sunk', () => {
+			const boardOne = Gameboard();
+			const shipOne = boardOne.placeShip(3, [0, 2], 'horizontal');
+			const shipTwo = boardOne.placeShip(2, [6, 6], 'horizontal');
+			boardOne.receiveAttack([0, 2]);
+			boardOne.receiveAttack([1, 2]);
+			boardOne.receiveAttack([2, 2]);
+			boardOne.receiveAttack([6, 6]);
+			boardOne.receiveAttack([7, 6]);
+
+			expect(boardOne.allSunk()).toBe(true);
+		});
+	});
 });

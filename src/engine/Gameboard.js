@@ -90,6 +90,11 @@ export const Gameboard = () => {
 	const getMissedCoordinates = () => [...missedCoordinates];
 	const getHitCoordinates = () => [...hitCoordinates];
 
+	const allSunk = () => {
+		if (shipArrays.length === 0) return false;
+		return shipArrays.every((obj) => obj.instance.isSunk());
+	};
+
 	return {
 		receiveAttack,
 		placeShip,
@@ -97,5 +102,6 @@ export const Gameboard = () => {
 		getShipInstance,
 		getMissedCoordinates,
 		getHitCoordinates,
+		allSunk,
 	};
 };
