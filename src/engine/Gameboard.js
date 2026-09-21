@@ -2,6 +2,8 @@ import { createShip } from './Ship.js';
 
 export const Gameboard = () => {
 	let shipArrays = [];
+	let missedCoordinates = [];
+	let hitCoordinates = [];
 
 	const placeShip = (length, coordinate, direction) => {
 		let shipCoordinate;
@@ -59,12 +61,41 @@ export const Gameboard = () => {
 		}
 	};
 
-	const receiveAttack = (x, y) => {};
+	const receiveAttack = (coordinate) => {
+		const hitCoordinateExist = hitCoordinates.some(
+			([x, y]) => x === coordinate[0] && y === coordinate[1]
+		);
+		const missedCoordinateExist = missedCoordinates.some(
+			([x, y]) => x === coordinate[0] && y === coordinate[1]
+		);
+		const isValidCoordinate =
+			coordinate[0] >= 0 &&
+			coordinate[0] <= 9 &&
+			coordinate[1] >= 0 &&
+			coordinate[1] <= 9;
+
+		if (hitCoordinateExist || missedCoordinateExist || !isValidCoordinate)
+			return null;
+		const shipInstance = getShipInstance(coordinate);
+		if (shipInstance) {
+			shipInstance.hit();
+			hitCoordinates.push(coordinate);
+			return true;
+		} else {
+			missedCoordinates.push(coordinate);
+			return false;
+		}
+	};
+
+	const getMissedCoordinates = () => [...missedCoordinates];
+	const getHitCoordinates = () => [...hitCoordinates];
 
 	return {
 		receiveAttack,
 		placeShip,
 		getShipCoordinate,
 		getShipInstance,
+		getMissedCoordinates,
+		getHitCoordinates,
 	};
 };
