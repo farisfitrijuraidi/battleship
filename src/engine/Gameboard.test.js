@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { Gameboard } from './Gameboard';
 
 describe('Gameboard object', () => {
-	describe('ship placement', () => {
+	describe('Ship placement', () => {
 		it('places a ship horizontally across valid coordinates', () => {
 			const boardOne = Gameboard();
 			const shipOne = boardOne.placeShip(3, [0, 2], 'horizontal');
@@ -59,7 +59,7 @@ describe('Gameboard object', () => {
 		});
 	});
 
-	describe('receiving attacks and recording misses', () => {
+	describe('Receiving attacks and recording misses', () => {
 		it('damages the correct ship when an attack hits an occupied coordinate', () => {
 			const boardOne = Gameboard();
 			const shipOne = boardOne.placeShip(3, [0, 2], 'horizontal');
@@ -106,7 +106,7 @@ describe('Gameboard object', () => {
 		});
 	});
 
-	describe('fleet status and game over', () => {
+	describe('Fleet status and game over', () => {
 		it('reports false when no ships have taken damage yet', () => {
 			const boardOne = Gameboard();
 			const shipOne = boardOne.placeShip(3, [0, 2], 'horizontal');
