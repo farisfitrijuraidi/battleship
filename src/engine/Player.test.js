@@ -35,4 +35,22 @@ describe('Player Object', () => {
 			]);
 		});
 	});
+
+	describe('Computer player attacks', () => {
+		it('fires automatically without manual coordinates', () => {
+			const humanPlayer = createPlayer('human', 'Player 1');
+			const computerPlayer = createPlayer('computer', 'Player 2');
+
+			humanPlayer.getBoard().placeShip(3, [0, 2], 'horizontal');
+			const humanBoardTotalCoordsLength =
+				humanPlayer.getBoard().getMissedCoordinates().length +
+				humanPlayer.getBoard().getHitCoordinates().length;
+			computerPlayer.attack(humanPlayer.getBoard());
+
+			expect(
+				humanPlayer.getBoard().getMissedCoordinates().length +
+					humanPlayer.getBoard().getHitCoordinates().length
+			).toEqual(humanBoardTotalCoordsLength + 1);
+		});
+	});
 });
