@@ -52,5 +52,20 @@ describe('Player Object', () => {
 					humanPlayer.getBoard().getHitCoordinates().length
 			).toEqual(humanBoardTotalCoordsLength + 1);
 		});
+
+		it('never attacks an already targeted square', () => {
+			const humanPlayer = createPlayer('human', 'Player 1');
+			const computerPlayer = createPlayer('computer', 'Player 2');
+
+			for (let i = 0; i < 100; i++) {
+				computerPlayer.attack(humanPlayer.getBoard());
+			}
+
+			const humanBoardTotalCoordsLength =
+				humanPlayer.getBoard().getMissedCoordinates().length +
+				humanPlayer.getBoard().getHitCoordinates().length;
+
+			expect(humanBoardTotalCoordsLength).toEqual(100);
+		});
 	});
 });
