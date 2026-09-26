@@ -89,6 +89,7 @@ export const Gameboard = () => {
 
 	const getMissedCoordinates = () => [...missedCoordinates];
 	const getHitCoordinates = () => [...hitCoordinates];
+	const getShipArray = () => [...shipArrays];
 
 	const allSunk = () => {
 		if (shipArrays.length === 0) return false;
@@ -102,6 +103,7 @@ export const Gameboard = () => {
 		getShipInstance,
 		getMissedCoordinates,
 		getHitCoordinates,
+		getShipArray,
 		allSunk,
 	};
 };
