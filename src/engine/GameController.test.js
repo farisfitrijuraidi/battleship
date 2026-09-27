@@ -27,4 +27,43 @@ describe('GameController object', () => {
 			).toBe(5);
 		});
 	});
+
+	describe('Turn flow and player attacks', () => {
+		it('executes an attack on the defending board', () => {
+			const gameOne = GameController();
+			gameOne.playRound([2, 0]);
+
+			expect(
+				gameOne.getPlayers()[1].getBoard().getHitCoordinates()
+			).toEqual([[2, 0]]);
+		});
+
+		it('switches turns after a valid attack', () => {
+			const gameOne = GameController();
+			gameOne.playRound([2, 0]);
+
+			expect(gameOne.getActivePlayer()).toBe(gameOne.getPlayers()[1]);
+		});
+
+		it('retains turn on an invalid move', () => {
+			const gameOne = GameController();
+			gameOne.playRound([2, 0]);
+			gameOne.playRound();
+			gameOne.playRound([2, 0]);
+
+			expect(gameOne.getActivePlayer()).toBe(gameOne.getPlayers()[0]);
+		});
+
+		it('allows a second human player to attack with coordinates', () => {
+			const gameOne = GameController('human', 'human');
+
+			gameOne.playRound([2, 0]);
+
+			gameOne.playRound([1, 1]);
+
+			expect(
+				gameOne.getPlayers()[0].getBoard().getHitCoordinates()
+			).toEqual([[1, 1]]);
+		});
+	});
 });

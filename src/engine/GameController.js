@@ -1,9 +1,11 @@
 import { createPlayer } from './Player';
-import { Gameboard } from './Gameboard';
 
-export const GameController = () => {
-	const playerOne = createPlayer('human', 'Player 1');
-	const playerTwo = createPlayer('computer', 'Player 2');
+export const GameController = (
+	rolePlayerOne = 'human',
+	rolePlayerTwo = 'computer'
+) => {
+	const playerOne = createPlayer(rolePlayerOne, 'Player 1');
+	const playerTwo = createPlayer(rolePlayerTwo, 'Player 2');
 
 	const players = [playerOne, playerTwo];
 	const getPlayers = () => players;
@@ -23,8 +25,36 @@ export const GameController = () => {
 	playerTwo.getBoard().placeShip(3, [7, 8], 'horizontal');
 	playerTwo.getBoard().placeShip(2, [1, 7], 'vertical');
 
+	const switchPlayerTurn = () => {
+		activePlayer = activePlayer === players[0] ? players[1] : players[0];
+	};
+
+	const playRound = (coordinate = null) => {
+		let boardStatus = false;
+		let opponent;
+
+		if (activePlayer === players[0]) {
+			opponent = players[1];
+		} else {
+			opponent = players[0];
+		}
+
+		if (activePlayer.getRole() === 'human' && coordinate) {
+			boardStatus = activePlayer.attack(opponent.getBoard(), coordinate);
+		} else if (activePlayer.getRole() === 'computer') {
+			boardStatus = activePlayer.attack(opponent.getBoard());
+		} else return;
+
+		if (boardStatus === null) {
+			return;
+		} else {
+			switchPlayerTurn();
+		}
+	};
+
 	return {
 		getPlayers,
 		getActivePlayer,
+		playRound,
 	};
 };
