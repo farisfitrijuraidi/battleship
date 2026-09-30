@@ -5,6 +5,7 @@ export const GameController = (
 	rolePlayerTwo = 'computer'
 ) => {
 	let isGameOver = false;
+	let winner = null;
 	const playerOne = createPlayer(rolePlayerOne, 'Player 1');
 	const playerTwo = createPlayer(rolePlayerTwo, 'Player 2');
 
@@ -33,7 +34,7 @@ export const GameController = (
 	const playRound = (coordinate = null) => {
 		if (isGameOver) return;
 		let boardStatus = false;
-		let opponent;
+		let opponent = null;
 
 		if (activePlayer === players[0]) {
 			opponent = players[1];
@@ -49,7 +50,8 @@ export const GameController = (
 
 		if (opponent.getBoard().allSunk()) {
 			isGameOver = true;
-			return true;
+			winner = activePlayer;
+			return;
 		}
 		if (boardStatus === null) {
 			return;
@@ -59,11 +61,13 @@ export const GameController = (
 	};
 
 	const getGameOverStatus = () => isGameOver;
+	const getWinner = () => winner;
 
 	return {
 		getPlayers,
 		getActivePlayer,
 		playRound,
 		getGameOverStatus,
+		getWinner,
 	};
 };

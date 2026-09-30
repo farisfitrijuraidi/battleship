@@ -97,5 +97,21 @@ describe('GameController object', () => {
 
 			expect(game.getGameOverStatus()).toBe(true);
 		});
+
+		it('declares the correct winner', () => {
+			const game = GameController();
+			const playerTwoShipCoords = [];
+			game.getPlayers()[1]
+				.getBoard()
+				.getShipArray()
+				.forEach((item) => playerTwoShipCoords.push(item.coordinate));
+
+			for (let i = 0; i < playerTwoShipCoords.flat().length; i++) {
+				game.playRound(playerTwoShipCoords.flat()[i]);
+				game.playRound();
+			}
+
+			expect(game.getWinner()).toBe(game.getPlayers()[0]);
+		});
 	});
 });
