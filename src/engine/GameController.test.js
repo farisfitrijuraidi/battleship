@@ -113,5 +113,28 @@ describe('GameController object', () => {
 
 			expect(game.getWinner()).toBe(game.getPlayers()[0]);
 		});
+
+		it('rejects attacks after game over', () => {
+			const game = GameController();
+			const playerTwoShipCoords = [];
+			game.getPlayers()[1]
+				.getBoard()
+				.getShipArray()
+				.forEach((item) => playerTwoShipCoords.push(item.coordinate));
+
+			for (let i = 0; i < playerTwoShipCoords.flat().length; i++) {
+				game.playRound(playerTwoShipCoords.flat()[i]);
+				game.playRound();
+			}
+
+			const totalNumOfHit = game
+				.getPlayers()[1]
+				.getBoard()
+				.getHitCoordinates().length;
+			game.playRound([0, 0]);
+			expect(
+				game.getPlayers()[1].getBoard().getHitCoordinates().length
+			).toEqual(totalNumOfHit);
+		});
 	});
 });
