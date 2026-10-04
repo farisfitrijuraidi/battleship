@@ -138,4 +138,42 @@ describe('Gameboard object', () => {
 			expect(boardOne.allSunk()).toBe(true);
 		});
 	});
+
+	describe('Gameboard - random ship placement', () => {
+		it('places the correct total number of ships on the board', () => {
+			const boardOne = Gameboard();
+			boardOne.placeShipsRandomly();
+
+			expect(boardOne.getShipArray().length).toBe(5);
+		});
+
+		it('occupies the correct total number of coordinates across all ships', () => {
+			const boardOne = Gameboard();
+			boardOne.placeShipsRandomly();
+
+			const totalSquares = boardOne
+				.getShipArray()
+				.reduce((sum, item) => sum + item.coordinate.length, 0);
+
+			expect(totalSquares).toBe(17);
+		});
+
+		it('produces different ship placements across multiple runs', () => {
+			const boardOne = Gameboard();
+			const boardTwo = Gameboard();
+
+			boardOne.placeShipsRandomly();
+			boardTwo.placeShipsRandomly();
+			const boardOneShipCoords = boardOne
+				.getShipArray()
+				.map((obj) => obj.coordinate);
+			const boardTwoShipCoords = boardTwo
+				.getShipArray()
+				.map((obj) => obj.coordinate);
+
+			expect(JSON.stringify(boardOneShipCoords)).not.toBe(
+				JSON.stringify(boardTwoShipCoords)
+			);
+		});
+	});
 });

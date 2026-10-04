@@ -87,6 +87,25 @@ export const Gameboard = () => {
 		}
 	};
 
+	const placeShipsRandomly = () => {
+		const shipsLength = [5, 4, 3, 3, 2];
+
+		for (const length of shipsLength) {
+			while (true) {
+				const randomXNumber = Math.floor(Math.random() * 10);
+				const randomYNumber = Math.floor(Math.random() * 10);
+				const direction =
+					Math.random() < 0.5 ? 'horizontal' : 'vertical';
+				const returnValue = !!placeShip(
+					length,
+					[randomXNumber, randomYNumber],
+					direction
+				);
+				if (returnValue) break;
+			}
+		}
+	};
+
 	const getMissedCoordinates = () => [...missedCoordinates];
 	const getHitCoordinates = () => [...hitCoordinates];
 	const getShipArray = () => [...shipArrays];
@@ -101,6 +120,7 @@ export const Gameboard = () => {
 		placeShip,
 		getShipCoordinate,
 		getShipInstance,
+		placeShipsRandomly,
 		getMissedCoordinates,
 		getHitCoordinates,
 		getShipArray,
