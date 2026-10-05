@@ -1,1 +1,54 @@
-@import "tailwindcss";
+:root {
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --font-board: 'Courgette';
+    --font-playAgain: 'Quantico';
+}
+
+@font-face {
+    font-family: 'Courgette';
+    src: url('./assets/fonts/Courgette-Regular.woff2') format('woff2'),
+        url('./assets/fonts/Courgette-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Quantico';
+    src: url('./assets/fonts/Quantico-Bold.woff2') format('woff2'),
+        url('./assets/fonts/Quantico-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}

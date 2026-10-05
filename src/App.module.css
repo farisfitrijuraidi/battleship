@@ -1,0 +1,108 @@
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr 26% 1fr;
+  background-image: url('./assets/backgroundimage.webp');
+  background-size: cover;
+  width: 100%;
+  min-height: 100vh;
+  align-items: center;
+}
+
+.battleship-logo {
+  background-image: url('./assets/battleshipUI.webp');
+  aspect-ratio: 4096 / 2288;
+  background-size: contain;
+  background-repeat: no-repeat;
+  grid-column: 2;
+  grid-row: 1;
+  width: 100%; 
+}
+
+.player-Board {
+  grid-column: 1;
+}
+
+.enemy-Board {
+  grid-column: 3;
+}
+
+.player-Board,
+.enemy-Board {
+  display: grid;
+  grid-template-rows: auto auto;
+  min-height: 100vh;
+  justify-items: center;
+  align-items: end;
+}
+
+.board-type {
+  font-family: 'Courgette';
+  font-size: xx-large;
+  color: white;
+  text-shadow: 0 0 10px rgb(255, 247, 0), 0 0 20px #ff8800, 0 0 30px #ff5500;
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  align-self: start;
+  justify-self: center;
+}
+
+.player-board-comp,
+.enemy-board-comp {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.game-over-UI {
+  background-color: rgba(0, 0, 0, 0.5); 
+  backdrop-filter: blur(5px);            
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.game-over {
+  background-image: url('./assets/gameOver.webp');
+  background-size: contain;
+  background-repeat: no-repeat;
+  aspect-ratio: 4096 / 2286;
+  width: 1000px;
+  position: relative;
+}
+
+.winner-name {
+  font-family: var(--font-board);
+  font-size: xx-large;
+  position: absolute;
+  top: 275px;
+  left: 440px;
+}
+
+.play-again {
+  font-family: var(--font-playAgain);
+  color: rgb(151, 253, 253);
+  background:none;
+  text-shadow: 0 0 10px rgb(255, 255, 255);
+  font-size: 2.5em;
+  position: absolute;
+  top: 345px;
+  left: 395px;
+  border-style: none;
+}
+
+.play-again:hover {
+  transform: scale(1.05);
+}
+
+.play-again:active {
+  transform: scale(0.95);
+}
+
+button:hover {
+  cursor: pointer;
+}

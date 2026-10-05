@@ -37,6 +37,10 @@ export const GameController = (
 			boardStatus = activePlayer.attack(opponent.getBoard(), coordinate);
 		} else if (activePlayer.getRole() === 'computer') {
 			boardStatus = activePlayer.attack(opponent.getBoard());
+			if (boardStatus) {
+				playRound();
+				return;
+			}
 		} else return;
 
 		if (opponent.getBoard().allSunk()) {
@@ -44,7 +48,7 @@ export const GameController = (
 			winner = activePlayer;
 			return;
 		}
-		if (boardStatus === null) {
+		if (boardStatus === null || boardStatus) {
 			return;
 		} else {
 			switchPlayerTurn();

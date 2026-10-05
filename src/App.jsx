@@ -1,8 +1,7 @@
-import './App.css'
+import styles from './App.module.css';
 import React, { useState } from "react";
-import { SquareGrid } from './component/SquareGrid.jsx';
+import { SquareGrid } from './component/SquareGrid/SquareGrid.jsx';
 import { GameController } from './engine/GameController.js';
-import { Coordinate } from './component/Coordinate.jsx';
 
 export const App = () => {
     const [game, setGame] = useState(() => GameController());
@@ -19,21 +18,26 @@ export const App = () => {
     }
 
     return (
-        <div className='main-container'>
-            <div className='player-Board'>
-                <div className='board-type'>Your Board</div>
-                <Coordinate className='coord-vert' direction='vertical' />
+        <div className={styles['main-container']}>
+            <div className={styles['battleship-logo']}>
+
+            </div>
+            <div className={styles['player-Board']}>
+                <div className={styles['board-type']}>Your Ships</div>
                 <SquareGrid className='player-board-comp' disabled={true} ship={game.getPlayers()[0].getBoard().getShipArray()} hit={game.getPlayers()[0].getBoard().getHitCoordinates()} miss={game.getPlayers()[0].getBoard().getMissedCoordinates()}/>
-                <Coordinate className='coord-horz' direction='horizontal' />
             </div>
-            <div className='enemy-Board'>
-                <div className='board-type'>Enemy Board</div>
-                <Coordinate className='coord-vert' direction='vertical' />
+            <div className={styles['enemy-Board']}>
+                <div className={styles['board-type']}>Enemy Ships</div>
                 <SquareGrid className='enemy-board-comp' disabled={game.getGameOverStatus() ? (true) : (null)} onClick={handleClick} ship={[]} hit={game.getPlayers()[1].getBoard().getHitCoordinates()} miss={game.getPlayers()[1].getBoard().getMissedCoordinates()}/>
-                <Coordinate className='coord-horz' direction='horizontal' />
             </div>
-            <div>{game.getWinner() === null ? (null) : (`${game.getWinner().getName()} wins!`)}</div>
-            <div>{game.getGameOverStatus() ? (<button onClick={handleRestart}>Play Again ?</button>) : (null)}</div>
+            {game.getGameOverStatus() ? (
+                <div className={styles['game-over-UI']}>
+                    <div className={styles['game-over']}>
+                        <div className={styles['winner-name']}>{game.getWinner() === null ? (null) : (`${game.getWinner().getName()}`)}</div>
+                        <button className={styles['play-again']} onClick={handleRestart} aria-label="Play again?">Play Again?</button>
+                    </div>
+                </div>
+            ) : null}
         </div>
     )
 }
