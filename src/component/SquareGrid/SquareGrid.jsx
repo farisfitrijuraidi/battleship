@@ -10,14 +10,13 @@ export const SquareGrid = ({className, onClick, disabled, hit = [], miss = [], s
                 let cellStatus = null;
                 let disabledStatus = false;
                 let shipLength = null;
-                const foundShipInstance = ship.some((obj) =>
+                const foundShipInstance = ship.find((obj) =>
                     obj.coordinate.some(
                         (item) => item[0] === pair[0] && item[1] === pair[1]
                     )
                 );
-                const shipInstance = ship.find(obj => obj.coordinate.some(item => item[0] === pair[0] && item[1] === pair[1]));
-                if (shipInstance) {
-                    shipLength = shipInstance.instance.getLength();
+                if (foundShipInstance) {
+                    shipLength = foundShipInstance.instance.getLength();
                 }
                 const foundHitCoord = hit.some(item => item[0] === pair[0] && item[1] === pair[1]);
                 const foundMissedCoord = miss.some(item => item[0] === pair[0] && item[1] === pair[1]);
