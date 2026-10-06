@@ -11,13 +11,10 @@
 }
 
 .grid-cell.water{
-  border: 1px solid black;
   background-color: #b8e5e5;
-  aspect-ratio: 1;
 }
 
 .grid-cell.hit {
-  border: 1px solid black;
   background-color: #FFFAA0;
   background-image: url('../../assets/skull.svg');
   background-size: cover;
@@ -25,63 +22,41 @@
 }
 
 .grid-cell.hit[data-length="2"]{
-  border: 1px solid black;
   background-color: #4cb6ed;
-  background-image: url('../../assets/skull.svg');
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .grid-cell.hit[data-length="3"]{
-  border: 1px solid black;
   background-color: #77DD77;
-  background-image: url('../../assets/skull.svg');
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .grid-cell.hit[data-length="4"]{
-  border: 1px solid black;
   background-color: #ae63c2;
-  background-image: url('../../assets/skull.svg');
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .grid-cell.hit[data-length="5"]{
-  border: 1px solid black;
   background-color: #ea7370;
-  background-image: url('../../assets/skull.svg');
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .grid-cell.miss{
-  border: 1px solid black;
   background-color: #b8e5e5;
   background-image: url('../../assets/x.svg');
   background-size: cover;
   background-repeat: no-repeat;
-  aspect-ratio: 1;
 }
 
 .grid-cell.ship[data-length="2"] {
-  border: 1px solid black;
   background-color: #4cb6ed;
 }
 
 .grid-cell.ship[data-length="3"] {
-  border: 1px solid black;
   background-color: #77DD77;
 }
 
 .grid-cell.ship[data-length="4"] {
-  border: 1px solid black;
   background-color: #ae63c2;
 }
 
 .grid-cell.ship[data-length="5"] {
-  border: 1px solid black;
   background-color: #ea7370;
 }
 

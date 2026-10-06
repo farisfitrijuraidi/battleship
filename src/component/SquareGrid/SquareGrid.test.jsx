@@ -17,8 +17,7 @@ describe("SquareGrid component", () => {
   });
 
   // it('verifies cell status classes', () => {
-  //   const ship = {getLength() : 3};
-  //   const mockShipArray = [{instance : ship, coordinate: [[3, 3],[3, 4],[3, 5]]}]
+  //   const mockShipArray = [{instance : 'foo', coordinate: [[3, 3],[3, 4],[3, 5]]}]
 
   //   render(<SquareGrid ship={mockShipArray} hit={[[3, 3], [3, 4]]} miss={[[2, 3], [2, 4]]}/>);
 

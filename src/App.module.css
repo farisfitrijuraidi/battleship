@@ -97,12 +97,9 @@
 
 .play-again:hover {
   transform: scale(1.05);
+  cursor: pointer;
 }
 
 .play-again:active {
   transform: scale(0.95);
-}
-
-button:hover {
-  cursor: pointer;
 }
